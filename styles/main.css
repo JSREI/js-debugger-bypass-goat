@@ -171,16 +171,21 @@ main {
 .hero .container {
     position: relative;
     z-index: 3;
+    max-width: 1400px;
 }
 
 .hero h2 {
-    font-size: 3.5rem;
+    font-size: 3rem;
     margin-bottom: 1.5rem;
     color: white;
     font-weight: 800;
     letter-spacing: -0.025em;
     line-height: 1.2;
     text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .hero p {
@@ -391,14 +396,26 @@ footer p {
 }
 
 /* Responsive design */
+@media (max-width: 1200px) {
+    .hero h2 {
+        font-size: 2.75rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero h2 {
+        font-size: 2.5rem;
+    }
+}
+
 @media (max-width: 768px) {
     .hero {
         padding: 6rem 0 4rem;
     }
 
     .hero h2 {
-        font-size: 2.5rem;
-        padding: 0 1rem;
+        font-size: 2.25rem;
+        white-space: normal;
     }
     
     .hero p {
