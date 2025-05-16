@@ -32,6 +32,9 @@ class I18nCaseDetail {
         // 更新页面中的按钮标签
         this.updateTestCaseButtons();
         
+        // 强制替换所有JavaScript中的硬编码状态文本
+        this.patchJavaScriptTexts();
+        
         // 在DOM加载完成后动态处理"测试完成"的显示
         setTimeout(() => {
             const resultMessage = document.querySelector('.result-message');
@@ -44,7 +47,70 @@ class I18nCaseDetail {
             if (stopButton) {
                 stopButton.textContent = this.i18n.currentLang === 'zh-CN' ? '停止测试' : 'Stop Test';
             }
+            
+            // 替换导航菜单中的文本
+            this.updateNavigation();
         }, 100);
+    }
+    
+    // 替换导航菜单中的文本
+    updateNavigation() {
+        const homeLink = document.querySelector('a[href="../../index.html"]');
+        if (homeLink) {
+            const icon = homeLink.querySelector('i');
+            homeLink.innerHTML = '';
+            if (icon) homeLink.appendChild(icon);
+            homeLink.appendChild(document.createTextNode(' ' + this.i18n.t('nav.home')));
+        }
+        
+        const casesLink = document.querySelector('a[href="../../cases/index.html"]');
+        if (casesLink) {
+            const icon = casesLink.querySelector('i');
+            casesLink.innerHTML = '';
+            if (icon) casesLink.appendChild(icon);
+            casesLink.appendChild(document.createTextNode(' ' + this.i18n.t('nav.testCases')));
+        }
+    }
+    
+    // 替换JavaScript中的硬编码中文文本
+    patchJavaScriptTexts() {
+        // 获取当前语言，保存为常量
+        const currentLang = this.i18n.currentLang;
+        
+        // 直接替换脚本中的常见状态文本
+        const scripts = document.querySelectorAll('script:not([src])');
+        scripts.forEach(script => {
+            if (script.textContent.includes('测试运行中') || script.textContent.includes('测试完成')) {
+                // 创建一个新的脚本元素，替换原始脚本中的状态文本
+                const newScript = document.createElement('script');
+                let newContent = script.textContent;
+                
+                // 替换常见状态文本
+                newContent = newContent.replace(/['"]测试运行中\.\.\.['"]|['"]测试运行中...['"]|['"]Test Running...['"]/, 
+                    `(window.currentLang === 'zh-CN' ? '测试运行中...' : 'Test Running...')`);
+                    
+                newContent = newContent.replace(/['"]测试完成['"]|['"]Test Complete['"]/, 
+                    `(window.currentLang === 'zh-CN' ? '测试完成' : 'Test Complete')`);
+                    
+                // setInterval特有的文本
+                if (document.querySelector('.test-container h2')?.textContent.includes('setInterval')) {
+                    newContent = newContent.replace(/['"]测试期间未检测到任何断点暂停\.['"]/, 
+                        `(window.currentLang === 'zh-CN' ? '测试期间未检测到任何断点暂停。' : 'No breakpoint pauses detected during the test.')`);
+                        
+                    newContent = newContent.replace(/['"]测试期间检测到执行被断点中断\.['"]/, 
+                        `(window.currentLang === 'zh-CN' ? '测试期间检测到执行被断点中断。' : 'Execution was interrupted by a breakpoint during the test.')`);
+                        
+                    newContent = newContent.replace(/['"]停止测试['"]|['"]Stop Test['"]/, 
+                        `(window.currentLang === 'zh-CN' ? '停止测试' : 'Stop Test')`);
+                }
+                
+                // 在脚本开头添加当前语言变量
+                newContent = `window.currentLang = "${currentLang}";\n` + newContent;
+                
+                newScript.textContent = newContent;
+                script.parentNode.replaceChild(newScript, script);
+            }
+        });
     }
     
     // 更新测试用例标题
@@ -172,8 +238,21 @@ class I18nCaseDetail {
         const codeBlock = document.querySelector('.code-block');
         if (!codeBlock) return;
         
+        // 创建完整的样式覆盖，强制覆盖原有的content属性值
         const style = document.createElement('style');
-        style.textContent = `.code-block::before { content: "${this.i18n.t('testCase.codeLabel')}"; }`;
+        style.textContent = `
+            .code-block::before { 
+                content: "${this.i18n.t('testCase.codeLabel')}" !important; 
+                position: absolute;
+                top: -12px;
+                left: 1rem;
+                background: var(--primary-color);
+                color: white;
+                padding: 0.25rem 0.75rem;
+                border-radius: 12px;
+                font-size: 0.875rem;
+            }
+        `;
         
         // 检查是否已经添加过样式
         const existingStyle = document.querySelector('style[data-i18n-code-label]');
