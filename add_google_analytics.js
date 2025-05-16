@@ -4,13 +4,13 @@ const path = require('path');
 // Google Analytics 代码
 const gaCode = `
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QXG8EZ2W5B"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6205QQM2F7"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'G-QXG8EZ2W5B');
+      gtag('config', 'G-6205QQM2F7');
     </script>
 `;
 
@@ -40,7 +40,7 @@ htmlFiles.forEach(filePath => {
     const fileContent = fs.readFileSync(filePath, 'utf8');
     
     // 检查是否已经包含 Google Analytics 代码
-    if (fileContent.includes('G-QXG8EZ2W5B')) {
+    if (fileContent.includes('G-6205QQM2F7')) {
       console.log(`文件 ${filePath} 已包含 Google Analytics 代码，跳过`);
       return;
     }
