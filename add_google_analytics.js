@@ -16,9 +16,9 @@ const gaCode = `
 
 // 查找所有需要处理的 HTML 文件
 const htmlFiles = [
-  // 已经处理过的文件
-  // 'index.html',
-  // 'cases/index.html',
+  // 主页和测试用例列表页
+  'index.html',
+  'cases/index.html',
   
   // 测试用例文件
   'test-cases/execute-debugger-patterns/{}[\'constructor\'](\'debugger\')();.html',
@@ -37,21 +37,18 @@ const htmlFiles = [
 htmlFiles.forEach(filePath => {
   try {
     // 读取文件内容
-    const fileContent = fs.readFileSync(filePath, 'utf8');
+    let fileContent = fs.readFileSync(filePath, 'utf8');
     
-    // 检查是否已经包含 Google Analytics 代码
-    if (fileContent.includes('G-6205QQM2F7')) {
-      console.log(`文件 ${filePath} 已包含 Google Analytics 代码，跳过`);
-      return;
-    }
+    // 删除旧的 Google Analytics 代码
+    fileContent = fileContent.replace(/<!-- Google tag \(gtag\.js\) -->\s*<script async src="https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-[A-Z0-9]+">\s*<\/script>\s*<script>\s*window\.dataLayer = window\.dataLayer \|\| \[\];\s*function gtag\(\){dataLayer\.push\(arguments\);}\s*gtag\('js', new Date\(\)\);\s*gtag\('config', '[^']+'\);\s*<\/script>/g, '');
     
-    // 在 </head> 标签前插入 Google Analytics 代码
-    const updatedContent = fileContent.replace('<head>', '<head>' + gaCode);
+    // 在 <head> 标签后插入新的 Google Analytics 代码
+    fileContent = fileContent.replace('<head>', '<head>' + gaCode);
     
     // 写回文件
-    fs.writeFileSync(filePath, updatedContent, 'utf8');
+    fs.writeFileSync(filePath, fileContent, 'utf8');
     
-    console.log(`成功添加 Google Analytics 代码到 ${filePath}`);
+    console.log(`成功更新 Google Analytics 代码到 ${filePath}`);
   } catch (error) {
     console.error(`处理文件 ${filePath} 时出错:`, error.message);
   }
