@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+    <!-- Lightbox2 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
 </head>
 <body>
     <header>
@@ -16,14 +18,24 @@
             <div class="container">
                 <div class="logo">
                     <i class="ri-code-box-line logo-icon"></i>
-                    <h1>JS Debugger Bypass</h1>
+                    <h1>JS Debugger Bypass Goat</h1>
                 </div>
                 <div class="nav-right">
                     <ul>
                         <li><a href="index.html" class="active"><i class="ri-home-4-line"></i> 首页</a></li>
                         <li><a href="cases/index.html"><i class="ri-test-tube-line"></i> 测试用例</a></li>
-                        <li><a href="https://github.com/JSREI/js-debugger-bypass-goat" target="_blank"><i class="ri-github-line"></i> GitHub</a></li>
                     </ul>
+                    <!-- 语言切换器 -->
+                    <div id="lang-switcher-wrapper" style="margin: 0 15px;">
+                        <div id="lang-switcher" style="display: flex; background: #f0f0f0; border-radius: 8px; overflow: hidden;">
+                            <div id="lang-zh" class="lang-option active" data-lang="zh-CN" style="padding: 8px 10px; cursor: pointer; display: flex; align-items: center; background: #4f46e5; color: white;">
+                                <i class="ri-check-line" style="margin-right: 4px;"></i>简体中文
+                            </div>
+                            <div id="lang-en" class="lang-option" data-lang="en-US" style="padding: 8px 10px; cursor: pointer;">
+                                English
+                            </div>
+                        </div>
+                    </div>
                     <a href="https://github.com/JSREI/js-debugger-bypass-goat" class="github-badge" target="_blank" aria-label="GitHub">
                         <svg height="32" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="32" data-view-component="true" class="octicon octicon-mark-github">
                             <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
@@ -58,6 +70,29 @@
                 <div class="shape shape-1"></div>
                 <div class="shape shape-2"></div>
                 <div class="shape shape-3"></div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container">
+                <div class="cta-content">
+                    <span class="section-badge">
+                        <i class="ri-rocket-line"></i>
+                        开始使用
+                    </span>
+                    <h3>准备好开始测试了吗？</h3>
+                    <p>立即开始测试各种 JavaScript 调试绕过技术</p>
+                    <div class="cta-buttons">
+                        <a href="cases/index.html" class="button white">
+                            <i class="ri-play-circle-line"></i>
+                            开始测试
+                        </a>
+                    </div>
+                </div>
+                <div class="cta-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                </div>
             </div>
         </section>
 
@@ -100,25 +135,24 @@
             </div>
         </section>
 
-        <section class="cta">
+        <section class="join-group">
             <div class="container">
-                <div class="cta-content">
-                    <span class="section-badge">
-                        <i class="ri-rocket-line"></i>
-                        开始使用
-                    </span>
-                    <h3>准备好开始测试了吗？</h3>
-                    <p>立即开始测试各种 JavaScript 调试绕过技术</p>
-                    <div class="cta-buttons">
-                        <a href="cases/index.html" class="button white">
-                            <i class="ri-play-circle-line"></i>
-                            开始测试
-                        </a>
+                <div class="join-group-content">
+                    <h2>加入我们的交流群</h2>
+                    <div class="qr-codes">
+                        <div class="qr-code">
+                            <img src="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20241016230653669.png" alt="逆向技术交流群" class="zoomable-image">
+                            <p>逆向技术交流群</p>
+                        </div>
+                        <div class="qr-code">
+                            <img src="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20231030132026541-7614065.png" alt="个人微信" class="zoomable-image">
+                            <p>个人微信（发送【逆向群】拉你进群）</p>
+                        </div>
+                        <div class="qr-code">
+                            <img src="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20241016231143315.png" alt="Telegram 群" class="zoomable-image">
+                            <p>Telegram 群 <a href="https://t.me/jsreijsrei" target="_blank">点此加入</a></p>
+                        </div>
                     </div>
-                </div>
-                <div class="cta-shapes">
-                    <div class="shape shape-1"></div>
-                    <div class="shape shape-2"></div>
                 </div>
             </div>
         </section>
@@ -129,7 +163,7 @@
             <div class="footer-content">
                 <div class="footer-logo">
                     <i class="ri-code-box-line logo-icon"></i>
-                    <span>JS Debugger Bypass</span>
+                    <span>JS Debugger Bypass Goat</span>
                 </div>
                 <div class="footer-links">
                     <a href="https://github.com/JSREI/js-debugger-bypass-goat" target="_blank">
@@ -148,6 +182,32 @@
         </div>
     </footer>
 
+    <div class="image-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <img src="" alt="大图">
+            <button class="close-modal">&times;</button>
+        </div>
+    </div>
+
     <script src="js/main.js"></script>
+    <!-- Lightbox2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+    <!-- 国际化相关脚本 -->
+    <script src="js/i18n/zh-CN.js"></script>
+    <script src="js/i18n/en-US.js"></script>
+    <script src="js/i18n/i18n-core.js"></script>
+    <script src="js/i18n/i18n-home.js"></script>
+    <script>
+        // 初始化国际化
+        new I18n();
+        // 配置 Lightbox
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'albumLabel': '%1 / %2',
+            'fadeDuration': 200
+        });
+    </script>
 </body>
 </html> 
