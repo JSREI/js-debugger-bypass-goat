@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试用例列表 - JavaScript 调试绕过测试平台</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+    <style>
+        .cases-container {
+            padding: 2rem 0;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .case-category {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .case-category h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .case-list {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .case-item {
+            background: var(--background-color);
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .case-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+        
+        .case-info {
+            flex: 1;
+        }
+        
+        .case-name {
+            font-weight: 500;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .case-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        
+        .case-link {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .case-badge {
+            background: rgba(79, 70, 229, 0.1);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            white-space: nowrap;
+            margin-left: 1rem;
+        }
+        
+        .case-badge i {
+            margin-right: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .cases-container {
+                padding: 1rem;
+            }
+            
+            .case-category {
+                padding: 1.5rem;
+            }
+            
+            .case-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .case-badge {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <div class="logo">
+                    <i class="ri-code-box-line logo-icon"></i>
+                    <h1>JS Debugger Bypass</h1>
+                </div>
+                <div class="nav-right">
+                    <ul>
+                        <li><a href="../index.html"><i class="ri-home-4-line"></i> 首页</a></li>
+                        <li><a href="index.html" class="active"><i class="ri-test-tube-line"></i> 测试用例</a></li>
+                        <li><a href="https://github.com/JSREI/js-debugger-bypass-goat" target="_blank"><i class="ri-github-line"></i> GitHub</a></li>
+                    </ul>
+                    <a href="https://github.com/JSREI/js-debugger-bypass-goat" class="github-badge" target="_blank" aria-label="GitHub">
+                        <svg height="32" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="32" data-view-component="true" class="octicon octicon-mark-github">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main style="padding-top: 6rem;">
+        <div class="container cases-container">
+            <div class="section-header">
+                <span class="section-badge">
+                    <i class="ri-test-tube-line"></i>
+                    测试用例
+                </span>
+                <h2>调试器绕过测试用例</h2>
+                <p>以下是所有可用的测试用例，点击即可开始测试</p>
+            </div>
+
+            <div class="case-category">
+                <h2><i class="ri-code-line"></i> 基础执行模式</h2>
+                <div class="case-list">
+                    <a href="../test-cases/execute-debugger-patterns/eval.html" class="case-link">
+                        <div class="case-item">
+                            <div class="case-info">
+                                <div class="case-name">eval 执行</div>
+                                <div class="case-description">使用 eval 函数执行 debugger 语句</div>
+                            </div>
+                            <span class="case-badge"><i class="ri-code-box-line"></i>基础测试</span>
+                        </div>
+                    </a>
+                    <a href="../test-cases/execute-debugger-patterns/Function.html" class="case-link">
+                        <div class="case-item">
+                            <div class="case-info">
+                                <div class="case-name">Function 构造函数</div>
+                                <div class="case-description">使用 Function 构造函数执行 debugger 语句</div>
+                            </div>
+                            <span class="case-badge"><i class="ri-code-box-line"></i>基础测试</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="case-category">
+                <h2><i class="ri-timer-line"></i> 定时器模式</h2>
+                <div class="case-list">
+                    <a href="../test-cases/execute-debugger-patterns/setInterval.html" class="case-link">
+                        <div class="case-item">
+                            <div class="case-info">
+                                <div class="case-name">setInterval 基础</div>
+                                <div class="case-description">使用 setInterval 循环执行 debugger 语句</div>
+                            </div>
+                            <span class="case-badge"><i class="ri-timer-line"></i>定时器</span>
+                        </div>
+                    </a>
+                    <a href="../test-cases/execute-debugger-patterns/setInterval-002.html" class="case-link">
+                        <div class="case-item">
+                            <div class="case-info">
+                                <div class="case-name">setInterval 高级</div>
+                                <div class="case-description">使用 setInterval 的高级变体执行 debugger 语句</div>
+                            </div>
+                            <span class="case-badge"><i class="ri-timer-line"></i>定时器</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="case-category">
+                <h2><i class="ri-braces-line"></i> 构造函数模式</h2>
+                <div class="case-list">
+                    <a href="../test-cases/execute-debugger-patterns/[].constructor.constructor('debugger')().html" class="case-link">
+                        <div class="case-item">
+                            <div class="case-info">
+                                <div class="case-name">数组构造函数</div>
+                                <div class="case-description">使用数组的构造函数链执行 debugger 语句</div>
+                            </div>
+                            <span class="case-badge"><i class="ri-braces-line"></i>构造函数</span>
+                        </div>
+                    </a>
+                    <a href="../test-cases/execute-debugger-patterns/{}['constructor']('debugger')());.html" class="case-link">
+                        <div class="case-item">
+                            <div class="case-info">
+                                <div class="case-name">对象构造函数</div>
+                                <div class="case-description">使用对象的构造函数执行 debugger 语句</div>
+                            </div>
+                            <span class="case-badge"><i class="ri-braces-line"></i>构造函数</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="case-category">
+                <h2><i class="ri-global-line"></i> 在线网站测试</h2>
+                <div class="case-list">
+                    <a href="../test-cases/online-site/www.json.cn.html" class="case-link">
+                        <div class="case-item">
+                            <div class="case-info">
+                                <div class="case-name">JSON.CN</div>
+                                <div class="case-description">JSON.CN 网站的调试检测绕过测试</div>
+                            </div>
+                            <span class="case-badge"><i class="ri-global-line"></i>在线网站</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="case-category">
+                <h2><i class="ri-tools-line"></i> 工具网站测试</h2>
+                <div class="case-list">
+                    <a href="../test-cases/tools/JavaScript Obfuscator Tool.html" class="case-link">
+                        <div class="case-item">
+                            <div class="case-info">
+                                <div class="case-name">JavaScript 混淆工具</div>
+                                <div class="case-description">JavaScript 混淆工具网站的调试检测绕过测试</div>
+                            </div>
+                            <span class="case-badge"><i class="ri-tools-line"></i>工具网站</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="case-category">
+                <h2><i class="ri-code-box-line"></i> 其他模式</h2>
+                <div class="case-list">
+                    <a href="../test-cases/execute-debugger-patterns/misc.html" class="case-link">
+                        <div class="case-item">
+                            <div class="case-info">
+                                <div class="case-name">其他测试用例</div>
+                                <div class="case-description">其他类型的 debugger 语句执行测试</div>
+                            </div>
+                            <span class="case-badge"><i class="ri-code-box-line"></i>其他</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="ri-code-box-line logo-icon"></i>
+                    <span>JS Debugger Bypass</span>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/JSREI/js-debugger-bypass-goat" target="_blank">
+                        <i class="ri-github-line"></i>
+                        GitHub
+                    </a>
+                    <a href="https://github.com/JSREI/js-debugger-bypass-goat/issues" target="_blank">
+                        <i class="ri-bug-line"></i>
+                        问题反馈
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 <a href="https://github.com/orgs/JSREI/" target="_blank" class="org-link">JSREI</a> (JavaScript Reverse Engineering Infrastructure). All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

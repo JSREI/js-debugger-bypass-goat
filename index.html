@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 调试绕过测试平台</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <div class="logo">
+                    <i class="ri-code-box-line logo-icon"></i>
+                    <h1>JS Debugger Bypass</h1>
+                </div>
+                <div class="nav-right">
+                    <ul>
+                        <li><a href="index.html" class="active"><i class="ri-home-4-line"></i> 首页</a></li>
+                        <li><a href="cases/index.html"><i class="ri-test-tube-line"></i> 测试用例</a></li>
+                        <li><a href="https://github.com/JSREI/js-debugger-bypass-goat" target="_blank"><i class="ri-github-line"></i> GitHub</a></li>
+                    </ul>
+                    <a href="https://github.com/JSREI/js-debugger-bypass-goat" class="github-badge" target="_blank" aria-label="GitHub">
+                        <svg height="32" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="32" data-view-component="true" class="octicon octicon-mark-github">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-badge">
+                    <i class="ri-shield-check-line"></i>
+                    <span>开源项目</span>
+                </div>
+                <h2>JavaScript 调试绕过测试平台</h2>
+                <p>一个用于测试和验证 JavaScript 调试绕过技术的在线平台</p>
+                <div class="cta-buttons">
+                    <a href="cases/index.html" class="button">
+                        <i class="ri-play-circle-line"></i>
+                        开始测试
+                    </a>
+                    <a href="https://github.com/JSREI/js-debugger-bypass-goat" class="button outline" target="_blank">
+                        <i class="ri-github-line"></i>
+                        查看源码
+                    </a>
+                </div>
+            </div>
+            <div class="hero-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </section>
+
+        <section class="workflow">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge">
+                        <i class="ri-flow-chart"></i>
+                        工作流程
+                    </span>
+                    <h2>如何使用</h2>
+                    <p>通过简单的步骤，快速开始你的测试</p>
+                </div>
+                <div class="workflow-steps">
+                    <div class="workflow-step">
+                        <div class="step-number">1</div>
+                        <div class="step-icon">
+                            <i class="ri-file-list-3-line"></i>
+                        </div>
+                        <h3>选择测试用例</h3>
+                        <p>从多个测试用例中选择需要验证的场景</p>
+                    </div>
+                    <div class="workflow-step">
+                        <div class="step-number">2</div>
+                        <div class="step-icon">
+                            <i class="ri-tools-line"></i>
+                        </div>
+                        <h3>准备测试工具</h3>
+                        <p>选择合适的调试工具和测试环境</p>
+                    </div>
+                    <div class="workflow-step">
+                        <div class="step-number">3</div>
+                        <div class="step-icon">
+                            <i class="ri-play-circle-line"></i>
+                        </div>
+                        <h3>执行测试</h3>
+                        <p>运行测试并观察结果</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container">
+                <div class="cta-content">
+                    <span class="section-badge">
+                        <i class="ri-rocket-line"></i>
+                        开始使用
+                    </span>
+                    <h3>准备好开始测试了吗？</h3>
+                    <p>立即开始测试各种 JavaScript 调试绕过技术</p>
+                    <div class="cta-buttons">
+                        <a href="cases/index.html" class="button white">
+                            <i class="ri-play-circle-line"></i>
+                            开始测试
+                        </a>
+                    </div>
+                </div>
+                <div class="cta-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="ri-code-box-line logo-icon"></i>
+                    <span>JS Debugger Bypass</span>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/JSREI/js-debugger-bypass-goat" target="_blank">
+                        <i class="ri-github-line"></i>
+                        GitHub
+                    </a>
+                    <a href="https://github.com/JSREI/js-debugger-bypass-goat/issues" target="_blank">
+                        <i class="ri-bug-line"></i>
+                        问题反馈
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 <a href="https://github.com/orgs/JSREI/" target="_blank" class="org-link">JSREI</a> (JavaScript Reverse Engineering Infrastructure). All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html> 
