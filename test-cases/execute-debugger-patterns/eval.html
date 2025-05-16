@@ -1,13 +1,303 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>eval</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eval 执行测试 - JavaScript Debugger Bypass Goat Debugger Bypass Goat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .guide-steps {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .guide-steps h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .steps-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .steps-list li {
+            margin: 1rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .steps-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            font-family: 'Fira Code', monospace;
+            position: relative;
+        }
+
+        .code-block::before {
+            content: "测试代码";
+            position: absolute;
+            top: -12px;
+            left: 1rem;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+        }
+
+        .result-message {
+            display: none;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .success-message {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .failure-message {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .details {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        #testButton {
+            display: block;
+            margin: 2rem auto;
+            padding: 0.75rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #testButton:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        #testButton:active {
+            transform: translateY(0);
+        }
+
+        .test-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .test-status.running {
+            color: var(--primary-color);
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <nav>
+            <div class="container">
+                <div class="logo">
+                    <i class="ri-code-box-line"></i>
+                    <h1>JS Debugger Bypass Goat</h1>
+                </div>
+                <div class="nav-right">
+                    <ul>
+                        <li><a href="../../index.html"><i class="ri-home-4-line"></i> 首页</a></li>
+                        <li><a href="../../cases/index.html"><i class="ri-test-tube-line"></i> 测试用例</a></li>
+                    </ul>
+                    <!-- 语言切换器 -->
+                    <div id="lang-switcher-wrapper" style="margin: 0 15px;">
+                        <div id="lang-switcher" style="display: flex; background: #f0f0f0; border-radius: 8px; overflow: hidden;">
+                            <div id="lang-zh" class="lang-option active" data-lang="zh-CN" style="padding: 8px 10px; cursor: pointer; display: flex; align-items: center; background: #4f46e5; color: white;">
+                                <i class="ri-check-line" style="margin-right: 4px;"></i>简体中文
+                            </div>
+                            <div id="lang-en" class="lang-option" data-lang="en-US" style="padding: 8px 10px; cursor: pointer;">
+                                English
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://github.com/JSREI/js-debugger-bypass-goat" class="github-badge" target="_blank" aria-label="GitHub">
+                        <svg height="32" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="32" data-view-component="true" class="octicon octicon-mark-github">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-<script>
-    eval("debugger");
-</script>
+    <main style="padding-top: 6rem;">
+        <div class="container">
+            <div class="test-container">
+                <h2>eval 执行测试</h2>
+                <p>这是一个使用 <code>eval()</code> 函数执行 debugger 语句的测试用例。</p>
+
+                <div class="guide-steps">
+                    <h3><i class="ri-guide-line"></i> 测试指南</h3>
+                    <ul class="steps-list">
+                        <li>打开浏览器开发者工具（Windows/Linux 按 F12，macOS 按 Command+Option+I，或右键选择"检查"）</li>
+                        <li>点击"开始测试"按钮，页面会自动触发 debugger 断点</li>
+                        <li>你的目标是：<strong>完全绕过这个 debugger 断点，使程序能够立即继续执行</strong></li>
+                        <li>如果代码执行时间超过 100ms，说明断点生效了，需要继续优化你的绕过方案</li>
+                        <li>只有当代码能够立即执行（不被断点打断）时，才算真正绕过了 debugger</li>
+                    </ul>
+                </div>
+
+                <div class="code-block">
+eval("debugger");</div>
+
+                <button id="testButton" onclick="runTest()">
+                    开始测试
+                </button>
+
+                <div id="testStatus" class="test-status"></div>
+
+                <div id="success" class="result-message success-message" style="display: none;">
+                    🎉 恭喜！你已成功绕过 debugger 断点！
+                    <div class="details">执行时间: <span id="execTime">0</span>ms</div>
+                </div>
+
+                <div id="failure" class="result-message failure-message" style="display: none;">
+                    ❌ 未能完全绕过 debugger 断点
+                    <div class="details">执行时间: <span id="execTimeFailure">0</span>ms，超过了 100ms 的限制，说明断点仍然生效。</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="ri-code-box-line"></i>
+                    <span>JS Debugger Bypass Goat</span>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/JSREI/js-debugger-bypass-goat" target="_blank">
+                        <i class="ri-github-line"></i>
+                        GitHub
+                    </a>
+                    <a href="https://github.com/JSREI/js-debugger-bypass-goat/issues" target="_blank">
+                        <i class="ri-bug-line"></i>
+                        问题反馈
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 <a href="https://github.com/orgs/JSREI/" target="_blank" class="org-link">JSREI</a> (JavaScript Reverse Engineering Infrastructure). All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 全局变量存储测试状态
+        let isTestRunning = false;
+
+        // 运行测试
+        function runTest() {
+            // 如果测试正在运行，直接返回
+            if (isTestRunning) return;
+            
+            // 更新UI状态
+            isTestRunning = true;
+            document.getElementById('testButton').disabled = true;
+            document.getElementById('testStatus').textContent = '测试运行中...';
+            document.getElementById('testStatus').classList.add('running');
+            document.getElementById('success').style.display = 'none';
+            document.getElementById('failure').style.display = 'none';
+
+            // 延迟一点执行测试，让UI有时间更新
+            setTimeout(() => {
+                // 记录开始时间
+                const startTime = performance.now();
+
+                // 执行测试代码
+                eval("debugger");
+
+                // 记录结束时间
+                const endTime = performance.now();
+                const executionTime = Math.round(endTime - startTime);
+
+                // 判断是否成功绕过
+                const isSuccess = executionTime < 100; // 如果执行时间小于100ms，认为成功绕过
+
+                // 更新UI
+                document.getElementById('testStatus').textContent = '测试完成';
+                document.getElementById('testStatus').classList.remove('running');
+                
+                if (isSuccess) {
+                    document.getElementById('execTime').textContent = executionTime;
+                    document.getElementById('success').style.display = 'block';
+                    document.getElementById('failure').style.display = 'none';
+                } else {
+                    document.getElementById('execTimeFailure').textContent = executionTime;
+                    document.getElementById('success').style.display = 'none';
+                    document.getElementById('failure').style.display = 'block';
+                }
+
+                // 重置状态
+                isTestRunning = false;
+                document.getElementById('testButton').disabled = false;
+            }, 100);
+        }
+    </script>
+    
+    <!-- 国际化相关脚本 -->
+    <script src="../../js/i18n/zh-CN.js"></script>
+    <script src="../../js/i18n/en-US.js"></script>
+    <script src="../../js/i18n/i18n-core.js"></script>
+    <script src="../../js/i18n/i18n-case-detail.js"></script>
+    <script>
+        // 初始化国际化
+        new I18n();
+    </script>
 </body>
 </html>

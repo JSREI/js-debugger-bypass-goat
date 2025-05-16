@@ -63,7 +63,6 @@
             margin: 1.5rem 0;
             font-family: 'Fira Code', monospace;
             position: relative;
-            white-space: pre;
         }
 
         .code-block::before {
@@ -193,7 +192,7 @@
                 </div>
 
                 <div class="code-block">
-(function () {}['constructor']('debugger')());</div>
+{}['constructor']('debugger')();</div>
 
                 <button id="testButton" onclick="runTest()">
                     开始测试
@@ -241,8 +240,6 @@
     <script>
         // 全局变量存储测试状态
         let isTestRunning = false;
-        let testCount = 0;
-        const MAX_TEST_COUNT = 10;
 
         // 运行测试
         function runTest() {
@@ -257,59 +254,39 @@
             document.getElementById('success').style.display = 'none';
             document.getElementById('failure').style.display = 'none';
 
-            testCount = 0;
-            let totalExecutionTime = 0;
-
-            // 创建一个测试循环
-            function runTestIteration() {
-                if (testCount >= MAX_TEST_COUNT) {
-                    const averageTime = Math.round(totalExecutionTime / MAX_TEST_COUNT);
-                    
-                    // 判断是否成功绕过
-                    const isSuccess = averageTime < 100; // 如果平均执行时间小于100ms，认为成功绕过
-
-                    // 更新UI
-                    document.getElementById('testStatus').textContent = '测试完成';
-                    document.getElementById('testStatus').classList.remove('running');
-                    
-                    if (isSuccess) {
-                        document.getElementById('execTime').textContent = averageTime;
-                        document.getElementById('success').style.display = 'block';
-                        document.getElementById('failure').style.display = 'none';
-                    } else {
-                        document.getElementById('execTimeFailure').textContent = averageTime;
-                        document.getElementById('success').style.display = 'none';
-                        document.getElementById('failure').style.display = 'block';
-                    }
-
-                    // 重置状态
-                    isTestRunning = false;
-                    document.getElementById('testButton').disabled = false;
-                    return;
-                }
-
+            // 延迟一点执行测试，让UI有时间更新
+            setTimeout(() => {
                 // 记录开始时间
                 const startTime = performance.now();
 
                 // 执行测试代码
-                (function () {}['constructor']('debugger')());
+                {}['constructor']('debugger')();
 
                 // 记录结束时间
                 const endTime = performance.now();
                 const executionTime = Math.round(endTime - startTime);
+
+                // 判断是否成功绕过
+                const isSuccess = executionTime < 100; // 如果执行时间小于100ms，认为成功绕过
+
+                // 更新UI
+                document.getElementById('testStatus').textContent = '测试完成';
+                document.getElementById('testStatus').classList.remove('running');
                 
-                totalExecutionTime += executionTime;
-                testCount++;
+                if (isSuccess) {
+                    document.getElementById('execTime').textContent = executionTime;
+                    document.getElementById('success').style.display = 'block';
+                    document.getElementById('failure').style.display = 'none';
+                } else {
+                    document.getElementById('execTimeFailure').textContent = executionTime;
+                    document.getElementById('success').style.display = 'none';
+                    document.getElementById('failure').style.display = 'block';
+                }
 
-                // 更新状态
-                document.getElementById('testStatus').textContent = `测试进行中... (${testCount}/${MAX_TEST_COUNT})`;
-
-                // 继续下一次测试
-                setTimeout(runTestIteration, 100);
-            }
-
-            // 开始第一次测试
-            runTestIteration();
+                // 重置状态
+                isTestRunning = false;
+                document.getElementById('testButton').disabled = false;
+            }, 100);
         }
     </script>
 
@@ -323,4 +300,4 @@
         new I18n();
     </script>
 </body>
-</html>
+</html> 
