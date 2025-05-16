@@ -187,9 +187,9 @@ class I18nCaseDetail {
                 : 'This is a test case that uses <code>setInterval</code> to execute the debugger statement in a loop.';
         }
         else if (titleText.includes('setInterval') && (titleText.includes('高级') || titleText.includes('Advanced'))) {
-            description.textContent = this.i18n.currentLang === 'zh-CN'
-                ? '这是一个使用 setInterval 的高级变体执行 debugger 语句的测试用例。此测试使用了字符串拼接和立即执行函数表达式来构造并执行 debugger 语句。'
-                : 'This is a test case that uses an advanced variant of setInterval to execute the debugger statement. This test uses string concatenation and immediately invoked function expressions to construct and execute the debugger statement.';
+            description.innerHTML = this.i18n.currentLang === 'zh-CN'
+                ? '这是一个使用 <code>setInterval</code> 的高级变体执行 debugger 语句的测试用例。此测试使用了字符串拼接和立即执行函数表达式来构造并执行 debugger 语句。'
+                : 'This is a test case that uses an advanced variant of <code>setInterval</code> to execute the debugger statement. This test uses string concatenation and immediately invoked function expressions to construct and execute the debugger statement.';
         }
         else if (titleText.includes('数组') || titleText.includes('Array')) {
             description.textContent = this.i18n.currentLang === 'zh-CN'
