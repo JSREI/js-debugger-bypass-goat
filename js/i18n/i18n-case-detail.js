@@ -55,6 +55,7 @@ class I18nCaseDetail {
     
     // 替换导航菜单中的文本
     updateNavigation() {
+        // 处理顶部导航链接
         const homeLink = document.querySelector('a[href="../../index.html"]');
         if (homeLink) {
             const icon = homeLink.querySelector('i');
@@ -70,6 +71,15 @@ class I18nCaseDetail {
             if (icon) casesLink.appendChild(icon);
             casesLink.appendChild(document.createTextNode(' ' + this.i18n.t('nav.testCases')));
         }
+        
+        // 处理页脚"问题反馈"链接
+        const feedbackLink = document.querySelector('.footer-links a[href*="issues"]');
+        if (feedbackLink) {
+            const icon = feedbackLink.querySelector('i');
+            feedbackLink.innerHTML = '';
+            if (icon) feedbackLink.appendChild(icon);
+            feedbackLink.appendChild(document.createTextNode(' ' + this.i18n.t('footer.feedback')));
+        }
     }
     
     // 替换JavaScript中的硬编码中文文本
@@ -80,7 +90,13 @@ class I18nCaseDetail {
         // 直接替换脚本中的常见状态文本
         const scripts = document.querySelectorAll('script:not([src])');
         scripts.forEach(script => {
-            if (script.textContent.includes('测试运行中') || script.textContent.includes('测试完成')) {
+            // 只处理包含中文或状态文本的脚本
+            if (script.textContent.includes('测试') || 
+                script.textContent.includes('运行中') || 
+                script.textContent.includes('完成') ||
+                script.textContent.includes('停止') ||
+                script.textContent.includes('断点')) {
+                
                 // 创建一个新的脚本元素，替换原始脚本中的状态文本
                 const newScript = document.createElement('script');
                 let newContent = script.textContent;
@@ -91,18 +107,28 @@ class I18nCaseDetail {
                     
                 newContent = newContent.replace(/['"]测试完成['"]|['"]Test Complete['"]/, 
                     `(window.currentLang === 'zh-CN' ? '测试完成' : 'Test Complete')`);
+                
+                newContent = newContent.replace(/['"]开始测试['"]|['"]Start Test['"]/, 
+                    `(window.currentLang === 'zh-CN' ? '开始测试' : 'Start Test')`);
                     
                 // setInterval特有的文本
                 if (document.querySelector('.test-container h2')?.textContent.includes('setInterval')) {
-                    newContent = newContent.replace(/['"]测试期间未检测到任何断点暂停\.['"]/, 
+                    newContent = newContent.replace(/['"]测试期间未检测到任何断点暂停\.['"]|['"]测试期间未检测到任何断点暂停。['"]/, 
                         `(window.currentLang === 'zh-CN' ? '测试期间未检测到任何断点暂停。' : 'No breakpoint pauses detected during the test.')`);
                         
-                    newContent = newContent.replace(/['"]测试期间检测到执行被断点中断\.['"]/, 
+                    newContent = newContent.replace(/['"]测试期间检测到执行被断点中断\.['"]|['"]测试期间检测到执行被断点中断。['"]/, 
                         `(window.currentLang === 'zh-CN' ? '测试期间检测到执行被断点中断。' : 'Execution was interrupted by a breakpoint during the test.')`);
                         
                     newContent = newContent.replace(/['"]停止测试['"]|['"]Stop Test['"]/, 
                         `(window.currentLang === 'zh-CN' ? '停止测试' : 'Stop Test')`);
                 }
+                
+                // 成功和失败消息
+                newContent = newContent.replace(/['"]🎉 恭喜！你已成功绕过 debugger 断点！['"]/, 
+                    `(window.currentLang === 'zh-CN' ? '🎉 恭喜！你已成功绕过 debugger 断点！' : '🎉 Congratulations! You have successfully bypassed the debugger breakpoint!')`);
+                    
+                newContent = newContent.replace(/['"]❌ 未能完全绕过 debugger 断点['"]/, 
+                    `(window.currentLang === 'zh-CN' ? '❌ 未能完全绕过 debugger 断点' : '❌ Failed to completely bypass the debugger breakpoint')`);
                 
                 // 在脚本开头添加当前语言变量
                 newContent = `window.currentLang = "${currentLang}";\n` + newContent;
@@ -155,27 +181,27 @@ class I18nCaseDetail {
                 ? '这是一个使用 Function 构造函数执行 debugger 语句的测试用例。' 
                 : 'This is a test case that uses the Function constructor to execute the debugger statement.';
         }
-        else if (titleText.includes('setInterval') && titleText.includes('基础')) {
-            description.textContent = this.i18n.currentLang === 'zh-CN'
-                ? '这是一个使用 setInterval 循环执行 debugger 语句的测试用例。'
-                : 'This is a test case that uses setInterval to execute the debugger statement in a loop.';
+        else if (titleText.includes('setInterval') && (titleText.includes('基础') || titleText.includes('Basic'))) {
+            description.innerHTML = this.i18n.currentLang === 'zh-CN'
+                ? '这是一个使用 <code>setInterval</code> 循环执行 debugger 语句的测试用例。'
+                : 'This is a test case that uses <code>setInterval</code> to execute the debugger statement in a loop.';
         }
-        else if (titleText.includes('setInterval') && titleText.includes('高级')) {
+        else if (titleText.includes('setInterval') && (titleText.includes('高级') || titleText.includes('Advanced'))) {
             description.textContent = this.i18n.currentLang === 'zh-CN'
                 ? '这是一个使用 setInterval 的高级变体执行 debugger 语句的测试用例。此测试使用了字符串拼接和立即执行函数表达式来构造并执行 debugger 语句。'
                 : 'This is a test case that uses an advanced variant of setInterval to execute the debugger statement. This test uses string concatenation and immediately invoked function expressions to construct and execute the debugger statement.';
         }
-        else if (titleText.includes('数组')) {
+        else if (titleText.includes('数组') || titleText.includes('Array')) {
             description.textContent = this.i18n.currentLang === 'zh-CN'
                 ? '这是一个使用数组的构造函数链执行 debugger 语句的测试用例。'
                 : 'This is a test case that uses the array constructor chain to execute the debugger statement.';
         }
-        else if (titleText.includes('对象')) {
+        else if (titleText.includes('对象') || titleText.includes('Object')) {
             description.textContent = this.i18n.currentLang === 'zh-CN'
                 ? '这是一个使用对象的构造函数执行 debugger 语句的测试用例。'
                 : 'This is a test case that uses the object constructor to execute the debugger statement.';
         }
-        else if (titleText.includes('其他')) {
+        else if (titleText.includes('其他') || titleText.includes('Other')) {
             description.textContent = this.i18n.currentLang === 'zh-CN'
                 ? '这是一个包含各种其他方式执行 debugger 语句的测试用例。'
                 : 'This is a test case containing various other ways to execute the debugger statement.';
