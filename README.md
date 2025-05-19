@@ -85,3 +85,30 @@ python -m http.server 8080
 ## 📜 许可证
 
 [MIT License](LICENSE) - © JSREI (JavaScript Reverse Engineering Infrastructure) 
+
+---
+
+# 逆向技术交流群
+
+<div align="center">
+  <div style="margin-bottom: 20px;">
+    <h3>扫码加入逆向技术微信交流群：</h3>
+    <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; display: inline-block;">
+      <img src="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20241016230653669.png" style="width: 200px; border-radius: 5px;">
+    </div>
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <h3>如群二维码过期，可以加我个人微信，发送【逆向群】拉你进群：</h3>
+    <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; display: inline-block;">
+      <img src="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20231030132026541-7614065.png" style="width: 200px; border-radius: 5px;">
+    </div>
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <h3><a href="https://t.me/jsreijsrei">点此</a>或扫码加入TG交流群：</h3>
+    <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; display: inline-block;">
+      <img src="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20241016231143315.png" style="width: 200px; border-radius: 5px;">
+    </div>
+  </div>
+</div> 

@@ -85,3 +85,30 @@ Pull Requests are welcome to add new test cases or improve existing ones. Any fo
 ## 📜 License
 
 [MIT License](LICENSE) - © JSREI (JavaScript Reverse Engineering Infrastructure) 
+
+---
+
+# Reverse Engineering Community
+
+<div align="center">
+  <div style="margin-bottom: 20px;">
+    <h3>Scan to join our WeChat group:</h3>
+    <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; display: inline-block;">
+      <img src="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20241016230653669.png" style="width: 200px; border-radius: 5px;">
+    </div>
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <h3>If the QR code expires, add my WeChat and send "逆向群" to join:</h3>
+    <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; display: inline-block;">
+      <img src="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20231030132026541-7614065.png" style="width: 200px; border-radius: 5px;">
+    </div>
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <h3><a href="https://t.me/jsreijsrei">Click here</a> or scan to join our Telegram group:</h3>
+    <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; display: inline-block;">
+      <img src="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20241016231143315.png" style="width: 200px; border-radius: 5px;">
+    </div>
+  </div>
+</div> 
