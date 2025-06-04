@@ -120,3 +120,7 @@ python -m http.server 8080
     </div>
   </div>
 </div> 
+
+## ⭐ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=JSREI/js-debugger-bypass-goat&type=Date)](https://star-history.com/#JSREI/js-debugger-bypass-goat&Date) 
