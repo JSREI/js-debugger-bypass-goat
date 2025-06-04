@@ -1,12 +1,12 @@
 const zhCN = {
-    title: 'JavaScript 调试绕过靶场测试平台',
+    title: 'JavaScript debugger bypass绕过靶场测试平台',
     nav: {
         home: '首页',
         testCases: '测试用例'
     },
     hero: {
         badge: '开源项目',
-        title: 'JavaScript 调试绕过靶场测试平台',
+        title: 'JavaScript debugger bypass绕过靶场测试平台',
         description: '一个用于测试和验证 JavaScript 调试绕过技术的在线靶场平台',
         startTest: '开始测试',
         viewSource: '查看源码'
@@ -43,6 +43,7 @@ const zhCN = {
         title: '加入我们的交流群',
         reverseGroup: '微信技术交流群',
         wechat: '微信个人号（发送【逆向群】拉你进群）',
+        qq: 'QQ群',
         telegram: 'Telegram 电报群',
         click_to_join: '点此加入'
     },

@@ -1,12 +1,12 @@
 const enUS = {
-    title: 'JavaScript Debugger Bypass Goat Testing Platform',
+    title: 'JavaScript debugger bypass Goat Testing Platform',
     nav: {
         home: 'Home',
         testCases: 'Test Cases'
     },
     hero: {
         badge: 'Open Source',
-        title: 'JavaScript Debugger Bypass Goat Testing Platform',
+        title: 'JavaScript debugger bypass Goat Testing Platform',
         description: 'An online platform for testing and validating JavaScript debugger bypass techniques',
         startTest: 'Start Testing',
         viewSource: 'View Source'
@@ -43,6 +43,7 @@ const enUS = {
         title: 'Join Our Community',
         reverseGroup: 'WeChat Group (Chinese Tech Community)',
         wechat: 'WeChat (Send "Reverse Group" to join)',
+        qq: 'QQ Group',
         telegram: 'Telegram Group',
         click_to_join: 'Click to join'
     },

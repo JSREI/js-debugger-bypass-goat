@@ -94,18 +94,30 @@ class I18nHome {
         if (joinGroupTitle) joinGroupTitle.textContent = this.i18n.t('joinGroup.title');
         
         const qrCodes = document.querySelectorAll('.qr-code p');
-        if (qrCodes.length >= 3) {
+        if (qrCodes.length >= 4) {
             qrCodes[0].textContent = this.i18n.t('joinGroup.reverseGroup');
             qrCodes[1].textContent = this.i18n.t('joinGroup.wechat');
             
-            // 对于第三个 QR 码，我们需要小心处理，因为它包含一个链接
-            const telegramText = qrCodes[2].childNodes[0];
+            // 处理QQ群
+            const qqText = qrCodes[2].childNodes[0];
+            if (qqText) {
+                qqText.textContent = this.i18n.t('joinGroup.qq') + ' ';
+            }
+            
+            // 更新QQ群"点此加入"链接文本
+            const qqLink = qrCodes[2].querySelector('a');
+            if (qqLink) {
+                qqLink.textContent = this.i18n.t('joinGroup.click_to_join');
+            }
+
+            // 处理Telegram群
+            const telegramText = qrCodes[3].childNodes[0];
             if (telegramText) {
                 telegramText.textContent = this.i18n.t('joinGroup.telegram') + ' ';
             }
 
-            // 更新"点此加入"链接文本
-            const telegramLink = qrCodes[2].querySelector('a');
+            // 更新Telegram"点此加入"链接文本
+            const telegramLink = qrCodes[3].querySelector('a');
             if (telegramLink) {
                 telegramLink.textContent = this.i18n.t('joinGroup.click_to_join');
             }
