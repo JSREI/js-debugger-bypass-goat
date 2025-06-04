@@ -130,11 +130,20 @@ class I18nCaseDetail {
                 newContent = newContent.replace(/['"]❌ 未能完全绕过 debugger 断点['"]/, 
                     `(window.currentLang === 'zh-CN' ? '❌ 未能完全绕过 debugger 断点' : '❌ Failed to completely bypass the debugger breakpoint')`);
                 
-                // 处理变量重复声明问题
-                newContent = newContent.replace(/let\s+isTestRunning/g, 'window.isTestRunning = window.isTestRunning || false');
+                // 完全移除变量重复声明的问题 - 不尝试替换变量声明
+                // 而是在脚本开头预先定义所有可能的变量，避免重复声明
+                let scriptPreamble = `
+// 预先定义国际化和测试所需变量，避免重复声明
+if (typeof window.currentLang === 'undefined') { 
+    window.currentLang = "${currentLang}"; 
+}
+if (typeof window.isTestRunning === 'undefined') {
+    window.isTestRunning = false;
+}
+`;
                 
-                // 在脚本开头添加当前语言变量（如果不存在）
-                newContent = `if (typeof window.currentLang === 'undefined') { window.currentLang = "${currentLang}"; }\n` + newContent;
+                // 将前导代码添加到脚本开头
+                newContent = scriptPreamble + newContent;
                 
                 newScript.textContent = newContent;
                 script.parentNode.replaceChild(newScript, script);
