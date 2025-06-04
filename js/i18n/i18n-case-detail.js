@@ -130,8 +130,11 @@ class I18nCaseDetail {
                 newContent = newContent.replace(/['"]❌ 未能完全绕过 debugger 断点['"]/, 
                     `(window.currentLang === 'zh-CN' ? '❌ 未能完全绕过 debugger 断点' : '❌ Failed to completely bypass the debugger breakpoint')`);
                 
-                // 在脚本开头添加当前语言变量
-                newContent = `window.currentLang = "${currentLang}";\n` + newContent;
+                // 处理变量重复声明问题
+                newContent = newContent.replace(/let\s+isTestRunning/g, 'window.isTestRunning = window.isTestRunning ||');
+                
+                // 在脚本开头添加当前语言变量（如果不存在）
+                newContent = `if (typeof window.currentLang === 'undefined') { window.currentLang = "${currentLang}"; }\n` + newContent;
                 
                 newScript.textContent = newContent;
                 script.parentNode.replaceChild(newScript, script);
