@@ -76,6 +76,7 @@ python -m http.server 8080
 欢迎加入我们的技术交流群：
 
 - 微信群：扫描仓库首页提供的二维码，或添加个人微信并发送【逆向群】，我们会拉你进群
+- QQ群：[点此加入](https://qm.qq.com/q/YfdB3w3OEY)
 - Telegram群：[https://t.me/jsreijsrei](https://t.me/jsreijsrei)
 
 ## 🤝 贡献
@@ -102,6 +103,13 @@ python -m http.server 8080
     <h3>如群二维码过期，可以加我个人微信，发送【逆向群】拉你进群：</h3>
     <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; display: inline-block;">
       <img src="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20231030132026541-7614065.png" style="width: 200px; border-radius: 5px;">
+    </div>
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <h3><a href="https://qm.qq.com/q/YfdB3w3OEY">点此</a>扫码加入QQ交流群：</h3>
+    <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; display: inline-block;">
+      <img src="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/jsrei-qq-group.jpg" style="width: 200px; border-radius: 5px;">
     </div>
   </div>
 

@@ -76,6 +76,7 @@ python -m http.server 8080
 Join our technical discussion groups:
 
 - WeChat Group: Scan the QR code on the repository homepage, or add the personal WeChat and send "逆向群" to be added to the group
+- QQ Group: [Click here to join](https://qm.qq.com/q/YfdB3w3OEY)
 - Telegram Group: [https://t.me/jsreijsrei](https://t.me/jsreijsrei)
 
 ## 🤝 Contributing
@@ -102,6 +103,13 @@ Pull Requests are welcome to add new test cases or improve existing ones. Any fo
     <h3>If the QR code expires, add my WeChat and send "逆向群" to join:</h3>
     <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; display: inline-block;">
       <img src="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20231030132026541-7614065.png" style="width: 200px; border-radius: 5px;">
+    </div>
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <h3><a href="https://qm.qq.com/q/YfdB3w3OEY">Click here</a> to scan and join our QQ group:</h3>
+    <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; display: inline-block;">
+      <img src="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/jsrei-qq-group.jpg" style="width: 200px; border-radius: 5px;">
     </div>
   </div>
 
