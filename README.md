@@ -124,3 +124,112 @@ python -m http.server 8080
 ## ⭐ Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=JSREI/js-debugger-bypass-goat&type=Date)](https://star-history.com/#JSREI/js-debugger-bypass-goat&Date) 
+
+## 项目结构
+
+这个项目最近进行了重构，采用了现代的模块化架构：
+
+```
+js-debugger-bypass-goat/
+├── js/                        # JavaScript源代码
+│   ├── core/                  # 核心工具类
+│   │   ├── constants.js       # 常量定义
+│   │   ├── event-emitter.js   # 事件发布订阅
+│   │   └── utils.js           # 通用工具函数
+│   ├── i18n/                  # 国际化相关代码
+│   │   ├── core/              # 国际化核心模块
+│   │   │   ├── dom-handler.js # DOM处理
+│   │   │   ├── i18n-manager.js# 国际化管理器
+│   │   │   └── resource-loader.js # 资源加载器
+│   │   ├── locales/           # 语言资源文件
+│   │   │   ├── en-US.js       # 英文
+│   │   │   └── zh-CN.js       # 中文
+│   │   └── ui/                # 国际化UI组件
+│   │       └── language-switcher.js # 语言切换器
+│   ├── ui/                    # UI组件
+│   │   ├── code-block.js      # 代码块组件
+│   │   └── image-viewer.js    # 图片查看器
+│   ├── app.js                 # 应用主逻辑
+│   ├── compat.js              # 向下兼容层
+│   └── main-new.js            # 新的入口点
+├── styles/                    # CSS样式文件
+├── cases/                     # 测试用例列表页
+├── test-cases/                # 具体测试用例
+│   ├── execute-debugger-patterns/  # 执行模式测试
+│   ├── online-site/           # 在线网站测试
+│   └── tools/                 # 工具网站测试
+├── index.html                 # 首页
+├── deploy.sh                  # 部署脚本
+└── update-html-files.sh       # HTML文件更新脚本
+```
+
+## 国际化系统
+
+我们实现了一个现代的国际化(i18n)系统，支持以下功能：
+
+- 基于数据属性的声明式绑定 (`data-i18n`, `data-i18n-params`, `data-i18n-attr`)
+- 动态语言切换和持久化
+- 模块化设计，易于扩展
+- 自动监听DOM变化，处理动态添加的内容
+- 完整的向下兼容性支持，兼容旧版页面
+
+## 开发指南
+
+### 使用国际化
+
+在HTML中添加国际化：
+
+```html
+<!-- 简单文本翻译 -->
+<div data-i18n="common.hello"></div>
+
+<!-- 带参数的翻译 -->
+<div data-i18n="common.welcome" data-i18n-params='{"name": "User"}'></div>
+
+<!-- 翻译属性 -->
+<input data-i18n-attr="placeholder:common.searchPlaceholder" />
+```
+
+在JavaScript中使用翻译：
+
+```javascript
+// 使用全局翻译函数
+const text = t('common.hello');
+
+// 带参数
+const welcome = t('common.welcome', {name: 'User'});
+
+// 使用i18n对象
+const text = i18n.translate('common.hello');
+```
+
+### 添加新的语言资源
+
+在 `js/i18n/locales` 目录下创建新的语言文件。
+
+### 部署
+
+使用部署脚本构建项目：
+
+```bash
+./deploy.sh
+```
+
+构建后的文件将位于 `dist/` 目录。
+
+## 浏览器兼容性
+
+该项目兼容所有现代浏览器，包括：
+
+- Chrome 60+
+- Firefox 60+ 
+- Safari 12+
+- Edge 79+
+
+## 贡献
+
+欢迎提交PR和Issue，请保持代码风格一致。
+
+## 许可证
+
+MIT 
