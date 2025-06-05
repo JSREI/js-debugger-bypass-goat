@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 这里的标题将被i18n自动翻译 -->
+    <title>Loading...</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
+    
+    <!-- 先加载语言资源文件 -->
+    <script src="js/i18n/zh-CN.js"></script>
+    <script src="js/i18n/en-US.js"></script>
+    
+    <!-- 然后加载i18n核心库 -->
+    <script src="js/i18n/i18n-core.js"></script>
+    
+    <style>
+        .demo-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .demo-section {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .example-box {
+            background-color: #f9fafb;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+        
+        pre {
+            background-color: #f1f5f9;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        
+        code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <nav class="header">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="index.html" class="logo">
+                    <img src="https://cdn.jsdelivr.net/gh/JSREI/js-debugger-bypass-goat/assets/logo.png" alt="Logo">
+                    <span data-i18n="title">JavaScript调试绕过靶场测试平台</span>
+                </a>
+            </div>
+            
+            <div class="nav-right">
+                <ul>
+                    <li><a href="index.html"><i class="ri-home-line"></i> <span data-i18n="nav.home">首页</span></a></li>
+                    <li><a href="cases/index.html"><i class="ri-flask-line"></i> <span data-i18n="nav.testCases">测试用例</span></a></li>
+                    <li class="lang-dropdown">
+                        <button class="lang-selector">
+                            <i class="ri-global-line"></i> 
+                            <span class="current-lang">中文</span>
+                        </button>
+                        <div class="lang-dropdown-content">
+                            <div id="lang-zh" class="lang-option" data-lang="zh-CN">中文</div>
+                            <div id="lang-en" class="lang-option" data-lang="en-US">English</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="demo-container">
+        <h1 data-i18n="demoPage.title">i18n 系统演示</h1>
+        <p data-i18n="demoPage.description">本页面展示了新版声明式i18n系统的使用方法</p>
+        
+        <div class="demo-section">
+            <h2 data-i18n="demoPage.sections.basic.title">基本文本翻译</h2>
+            <p data-i18n="demoPage.sections.basic.description">使用 data-i18n 属性来翻译文本内容</p>
+            
+            <div class="example-box">
+                <h4>例子:</h4>
+                <p data-i18n="testCase.eval.title">eval 执行测试</p>
+                <pre><code>&lt;p data-i18n="testCase.eval.title"&gt;eval 执行测试&lt;/p&gt;</code></pre>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2 data-i18n="demoPage.sections.html.title">HTML内容翻译</h2>
+            <p data-i18n="demoPage.sections.html.description">使用 data-i18n-html 属性来翻译HTML内容</p>
+            
+            <div class="example-box">
+                <h4>例子:</h4>
+                <p data-i18n-html="demoPage.sections.html.example">这是包含<code>HTML标签</code>的内容</p>
+                <pre><code>&lt;p data-i18n-html="demoPage.sections.html.example"&gt;这是包含&lt;code&gt;HTML标签&lt;/code&gt;的内容&lt;/p&gt;</code></pre>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2 data-i18n="demoPage.sections.attr.title">属性翻译</h2>
+            <p data-i18n="demoPage.sections.attr.description">使用 data-i18n-attr 属性来翻译元素的其他属性</p>
+            
+            <div class="example-box">
+                <h4>例子:</h4>
+                <input type="text" data-i18n-attr="placeholder:demoPage.sections.attr.placeholder">
+                <pre><code>&lt;input type="text" data-i18n-attr="placeholder:demoPage.sections.attr.placeholder"&gt;</code></pre>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2 data-i18n="demoPage.sections.params.title">参数插值</h2>
+            <p data-i18n="demoPage.sections.params.description">通过 data-i18n-params 属性传递插值参数</p>
+            
+            <div class="example-box">
+                <h4>例子:</h4>
+                <p 
+                    data-i18n="testCase.success.detail" 
+                    data-i18n-params='{"time": "47"}'>执行时间: 47ms</p>
+                <pre><code>&lt;p data-i18n="testCase.success.detail" data-i18n-params='{"time": "47"}'&gt;执行时间: 47ms&lt;/p&gt;</code></pre>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2 data-i18n="demoPage.sections.dynamic.title">动态内容</h2>
+            <p data-i18n="demoPage.sections.dynamic.description">动态添加的元素也会自动翻译</p>
+            
+            <div class="example-box">
+                <h4>例子:</h4>
+                <button onclick="addDynamicElement()">添加新元素</button>
+                <div id="dynamicContainer"></div>
+                
+                <script>
+                    function addDynamicElement() {
+                        const container = document.getElementById('dynamicContainer');
+                        const paragraph = document.createElement('p');
+                        paragraph.setAttribute('data-i18n', 'demoPage.sections.dynamic.newElement');
+                        // 默认文本 (在翻译被应用前可能会短暂显示)
+                        paragraph.textContent = '这是动态添加的元素';
+                        container.appendChild(paragraph);
+                    }
+                </script>
+                
+                <pre><code>// JavaScript 代码
+function addDynamicElement() {
+    const container = document.getElementById('dynamicContainer');
+    const paragraph = document.createElement('p');
+    paragraph.setAttribute('data-i18n', 'demoPage.sections.dynamic.newElement');
+    paragraph.textContent = '这是动态添加的元素';
+    container.appendChild(paragraph);
+}</code></pre>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="https://github.com/JSREI/js-debugger-bypass-goat" target="_blank">
+                    <i class="ri-github-fill"></i> GitHub
+                </a>
+                <a href="https://github.com/JSREI/js-debugger-bypass-goat/issues" target="_blank">
+                    <i class="ri-error-warning-line"></i> <span data-i18n="footer.feedback">问题反馈</span>
+                </a>
+            </div>
+            <p class="copyright" data-i18n="footer.rights">© 2024 JSREI (JavaScript Reverse Engineering Infrastructure). All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- 添加翻译资源，用于演示 -->
+    <script>
+        // 添加演示页面的翻译资源
+        zhCN.demoPage = {
+            title: 'i18n 系统演示',
+            description: '本页面展示了新版声明式i18n系统的使用方法',
+            sections: {
+                basic: {
+                    title: '基本文本翻译',
+                    description: '使用 data-i18n 属性来翻译文本内容'
+                },
+                html: {
+                    title: 'HTML内容翻译',
+                    description: '使用 data-i18n-html 属性来翻译HTML内容',
+                    example: '这是包含<code>HTML标签</code>的内容'
+                },
+                attr: {
+                    title: '属性翻译',
+                    description: '使用 data-i18n-attr 属性来翻译元素的其他属性',
+                    placeholder: '请输入内容...'
+                },
+                params: {
+                    title: '参数插值',
+                    description: '通过 data-i18n-params 属性传递插值参数'
+                },
+                dynamic: {
+                    title: '动态内容',
+                    description: '动态添加的元素也会自动翻译',
+                    newElement: '这是动态添加的元素（中文）'
+                }
+            }
+        };
+        
+        enUS.demoPage = {
+            title: 'i18n System Demo',
+            description: 'This page demonstrates how to use the new declarative i18n system',
+            sections: {
+                basic: {
+                    title: 'Basic Text Translation',
+                    description: 'Use the data-i18n attribute to translate text content'
+                },
+                html: {
+                    title: 'HTML Content Translation',
+                    description: 'Use data-i18n-html attribute to translate HTML content',
+                    example: 'This content contains <code>HTML tags</code>'
+                },
+                attr: {
+                    title: 'Attribute Translation',
+                    description: 'Use data-i18n-attr attribute to translate other element attributes',
+                    placeholder: 'Enter content...'
+                },
+                params: {
+                    title: 'Parameter Interpolation',
+                    description: 'Pass interpolation parameters using data-i18n-params attribute'
+                },
+                dynamic: {
+                    title: 'Dynamic Content',
+                    description: 'Dynamically added elements are also translated automatically',
+                    newElement: 'This is a dynamically added element (English)'
+                }
+            }
+        };
+    </script>
+</body>
+</html> 
