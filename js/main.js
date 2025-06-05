@@ -1,3 +1,38 @@
+/**
+ * @deprecated 此文件已弃用，请使用新的模块化系统 (main-new.js)
+ * 
+ * 为保证向下兼容性，此文件仍然可用，但建议使用新的模块化系统
+ */
+
+console.warn('[DEPRECATED] main.js 已弃用，请使用新的模块化系统 (main-new.js)');
+
+// 尝试加载新的模块化系统
+(function() {
+    try {
+        const script = document.createElement('script');
+        script.type = 'module';
+        
+        // 尝试确定正确的路径
+        const currentPath = window.location.pathname;
+        
+        if (currentPath.includes('/cases/')) {
+            script.src = '../js/main-new.js';
+        } else if (currentPath.includes('/test-cases/')) {
+            const pathParts = currentPath.split('/');
+            // 计算需要回退的目录层级
+            const depth = pathParts.length - pathParts.indexOf('test-cases') - 1;
+            script.src = '../'.repeat(depth) + 'js/main-new.js';
+        } else {
+            script.src = 'js/main-new.js';
+        }
+        
+        document.head.appendChild(script);
+        console.log('已自动加载新的模块化系统:', script.src);
+    } catch (e) {
+        console.error('加载新的模块化系统失败', e);
+    }
+})();
+
 // 通用功能
 document.addEventListener('DOMContentLoaded', () => {
     // 为所有代码块添加复制功能
