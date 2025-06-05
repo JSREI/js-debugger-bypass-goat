@@ -208,17 +208,15 @@
         </div>
     </div>
 
-    <script src="js/main.js"></script>
+    <!-- 加载模块化的国际化系统 -->
+    <script type="module" src="js/main-new.js"></script>
+    
+    <!-- 紧急修复版国际化脚本（如果模块化系统加载失败会作为备用） -->
+    <script src="js/i18n/i18n-emergency-fix-new.js"></script>
+    
     <!-- Lightbox2 JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
-    <!-- 国际化相关脚本 -->
-    <script src="js/i18n/zh-CN.js"></script>
-    <script src="js/i18n/en-US.js"></script>
-    <script src="js/i18n/i18n-core.js"></script>
-    <script src="js/i18n/i18n-home.js"></script>
     <script>
-        // 初始化国际化
-        new I18n();
         // 配置 Lightbox
         lightbox.option({
             'resizeDuration': 200,
