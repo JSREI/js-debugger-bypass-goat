@@ -28,6 +28,17 @@
 
 👉 **[https://jsrei.github.io/js-debugger-bypass-goat/](https://jsrei.github.io/js-debugger-bypass-goat/)**
 
+## 📸 项目截图
+
+### 首页界面
+![首页截图](images/homepage-screenshot.png)
+
+### 测试用例列表
+![测试用例列表截图](images/test-cases-screenshot.png)
+
+### 具体测试用例示例
+![测试用例示例截图](images/test-case-example-screenshot.png)
+
 ## ✨ 项目特点
 
 - 🧪 **多样化的测试案例** - 覆盖从基础到高级的各种调试绕过场景
